@@ -4,7 +4,7 @@ body {
     font-size: 15px;
     background-color: #202930;
     color: #C5CBD3;
-    min-width: 400px;
+    min-width: 450px;
 }
 
 /* Showcase */
@@ -152,11 +152,10 @@ li {
 }
 
 form, .content {
-	width: 90%;
+	width: 95%;
 	margin: 0px auto;
-	padding: 10px;
+	padding: 5px;
 	border: 1px solid #B0C4DE;
-
 	border-radius:10px;
 }
 .input-group {
@@ -185,8 +184,9 @@ form, .content {
 	border: 1px solid gray;
 }
 .btn {
+  float: left;
 	padding: 10px;
-	font-size: 15px;
+	font-size: 10px;
 	color: white;
 	background: #5F9EA0;
 	border-radius: 10px;
