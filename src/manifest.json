@@ -1,10 +1,4 @@
 {
-<<<<<<< Updated upstream
-  "name": "PerfectPassword",
-  "version": "1.0",
-  "manifest_version": 2,
-=======
-<<<<<<< HEAD
   "manifest_version": 2,
 
   "name": "ProjectPerfectPassword",
@@ -18,10 +12,4 @@
     "permissions": [
     "activeTab"
     ]
-=======
-  "name": "PerfectPassword",
-  "version": "1.0",
-  "manifest_version": 2,
->>>>>>> main
->>>>>>> Stashed changes
 }
