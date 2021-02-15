@@ -192,6 +192,22 @@ form, .content {
 	border-radius: 10px;
 	border: 2px solid #000000;	
 }
+
+input[type=button] {
+    float: center;
+	padding: 10px;
+	font-size: 10px;
+	color: white;
+	background: #5F9EA0;
+	border-radius: 10px;
+	border: 2px solid #000000;	
+}
+
+.button-div {
+	text-align:center;
+	float: center;
+}
+
 .error {
 	width: 92%;
 	margin: 0px auto;

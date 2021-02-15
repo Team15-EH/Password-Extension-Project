@@ -4,9 +4,9 @@
       <meta charset="utf-8">
       <link rel="stylesheet" href="./extensionStylesheet.css">
       <title>Project Perfect Password</title>
-	  <script src="popup.js"></script>
+	  <script type="text/javascript" src="popup.js"></script>
    </head>
-   <body onload="setUp()">
+   <body>
       <div>
          <h1>Project Perfect Password</h1>
       </div>
@@ -42,12 +42,12 @@
 			 <hr>
 			</div>
 			<div id="passEtiqButtons" align="center">
-				<button class="btn" onclick="threeWordsToggle()" type="button">3 Random Words Approach</button>
-				<button class="btn" onclick="generalTipsToggle()" type="button">General Tips</button>
-				<button class="btn" onclick="extraSecurityToggle()" type="button">Extra Security</button>
+				<input type='button' id='threeWordsButton' value='3 Random Words Approach'>
+				<input type='button' id='generalTipsButton' value='General Tips'>
+				<input type='button' id='extraSecurityButton' value='Extra Security'>
 			</div>
 			<hr>
-			<div>
+			<div id="passSecuritySummary">
 			<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
 			Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
 			Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
@@ -82,18 +82,18 @@
 			 <hr>
 			</div>
 		</div>
-      <div>
+      <div class=button-div>
          <form>
             <input type="password" name="pswd" id="passForm" placeholder="Password">
             <ul>
                <li>
-                  <button class="btn" id="passEtiqMain" onclick="passPageToggle()" type="button">Password Etiquette</button>
+					<input type='button' id='passPageButton' value='Password Etiquette'>
+			   </li>
+               <li>
+					<input type='button' id='passCheckButton' value='Check Password Breach'>
                </li>
                <li>
-                  <button class="btn">Check Password Breach</button>
-               </li>
-               <li>
-                  <button class="btn">Link to Github Repo</button>
+					<input type='button' id='repoLink' value='Link to Github Repository'>
                </li>
             </ul>
             <br>
