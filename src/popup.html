@@ -4,41 +4,90 @@
       <meta charset="utf-8">
       <link rel="stylesheet" href="./extensionStylesheet.css">
       <title>Project Perfect Password</title>
-      <script src="popup.js"></script>
+	  <script src="popup.js"></script>
    </head>
-   <body>
+   <body onload="setUp()">
       <div>
          <h1>Project Perfect Password</h1>
       </div>
-      <div>
-         <hr>
-         <h3>Your Password is: STRONG</h3>
-         <hr>
-      </div>
-      <div>
-         <pre>Though your password is currently missing:
-        Doesn't contain ---
-        Doesn't contain ---
-        Doesn't contain ---
-        Doesn't contain --- </pre>
-         <hr>
-      </div>
-      <div>
-         <p>It is estimated that your password would take:</p>
-         <p>"TIME" to brute force</p>
-         <hr>
-      </div>
-      <div>
-         <p>You should change your password frequently.</p>
-         <p>We recommend that you change it by: 30/02/22</p>
-         <hr>
-      </div>
+		<div id="passStrengthPage">
+		  <div>
+			 <hr>
+			 <h3>Your Password is: STRONG</h3>
+			 <hr>
+		  </div>
+		  <div>
+			 <pre>Though your password is currently missing:
+			Doesn't contain ---
+			Doesn't contain ---
+			Doesn't contain ---
+			Doesn't contain --- </pre>
+			 <hr>
+		  </div>
+		  <div>
+			 <p>It is estimated that your password would take:</p>
+			 <p>"TIME" to brute force</p>
+			 <hr>
+		  </div>
+		  <div>
+			 <p>You should change your password frequently.</p>
+			 <p>We recommend that you change it by: 30/02/22</p>
+			 <hr>
+		  </div>
+		</div>
+		<div id="passEtiqPage">
+			<div>
+			 <hr>
+			 <h3>Password Etiquette</h3>
+			 <hr>
+			</div>
+			<div id="passEtiqButtons" align="center">
+				<button class="btn" onclick="threeWordsToggle()" type="button">3 Random Words Approach</button>
+				<button class="btn" onclick="generalTipsToggle()" type="button">General Tips</button>
+				<button class="btn" onclick="extraSecurityToggle()" type="button">Extra Security</button>
+			</div>
+			<hr>
+			<div>
+			<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+			Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+			Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+			Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+			</div>
+			<div id="threeRandom">
+				<h4>There are a variety of ways to make your password more secure.</h3>
+				<p>One practice heralded by the National Cyber Security Centre is
+				to find three random words from a dictionary and combine them to
+				create a long string of random characters. This approach is appropriately titled
+				the "Three Random Words" approach.</p>
+				<p>This approach aims to make it more difficult to break password's via
+				brute force by both increasing their length and avoiding the useage of 
+				single word passwords which can be easily cracked by Dictionary attacks. 
+				Additionally this approach takes human memory into account by making
+				passwords easier to remember than simply a random combination of 
+				characters.</p>
+			</div>
+			<div id="generalTips">
+				<h4>Here are some general tips to increase your password's security.</h3>
+					<p>>It is extremely dangerous to use easily accessible information about yourself.</p>
+					<p>>The longer your password the better as this will make it more difficult for brute force attacks to be successful</p>
+					<p>>Use a variety of numbers and special characters to stop basic wordlists.</p>
+					<p>>Each of these tips can be used in conunction with the three random words approach to create a secure password.</p>
+			</div>
+			<div id="extraSecurity">
+				<h4>If you wish to make your password security more convenient or even stronger these tips will help!</h3>
+				<p>Make use of a good password manager.</p>
+				<p>Ensure that two factor authentication is turned on and set up correctly.</p>
+			</div>
+			<div>
+			 <hr>
+			</div>
+		</div>
       <div>
          <form>
-            <input type="password" name="pswd" placeholder="Password">
+            <input type="password" name="pswd" id="passForm" placeholder="Password">
             <ul>
                <li>
-                  <button class="btn">Password Etiquette</button>
+                  <button class="btn" id="passEtiqMain" onclick="passPageToggle()" type="button">Password Etiquette</button>
                </li>
                <li>
                   <button class="btn">Check Password Breach</button>
@@ -50,6 +99,6 @@
             <br>
             <br>
          </form>
-      </div>
+      </div> 
    </body>
 </html>
