@@ -63,6 +63,28 @@ function passCheck()
 	var m = new Date().getMonth() + 1;
 	var y = new Date().getFullYear();
 	document.getElementById("date").innerHTML = "We recommend that you change it by: " + d + "/" + (m + 6) + "/"  + y;
+	
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	if (password.length > 0)
+	{
+	var numOfCapitals = (password.match(/[A-Z]/g) || []).length;
+	var numOfLower= (password.match(/[a-z]/g) || []).length;
+	var numOfNumbers = (password.match(/[0-9]/g) || []).length;
+	//var numOfSpecial = (password.match(/[@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g).length;
+	document.getElementById("length").innerHTML = " Password length = " + password.length;
+	document.getElementById("number").innerHTML = " Number of Numbers  = " + numOfNumbers;
+	document.getElementById("upper").innerHTML = " Number of uppercase = " + numOfCapitals;
+	document.getElementById("lower").innerHTML = " Number of lowercase = " + numOfLower;
+	//document.getElementById("special").innerHTML = " Number of special = " + numOfSpecial;
+	
+	}
+	else
+	{
+	//failsafe
+	alert("Empty User Input, Please try again");
+	}
 };
 
 //OpenRepoLink Function
@@ -157,3 +179,4 @@ function extraSecurityToggle()
 	y.style.display = "none";
 	z.style.display = "block";
 };
+
