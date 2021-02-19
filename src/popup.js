@@ -66,25 +66,57 @@ function passCheck()
 	
 	
 	
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Disect password to see what it contains
 	if (password.length > 0)
 	{
 	var numOfCapitals = (password.match(/[A-Z]/g) || []).length;
 	var numOfLower= (password.match(/[a-z]/g) || []).length;
 	var numOfNumbers = (password.match(/[0-9]/g) || []).length;
-	//var numOfSpecial = (password.match(/[@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g).length;
+	
+	/*
+	//var numOfConsecutiveChars = (password.match(/[a-z]\1/ig) || []).length;
+	//var numOfSpecial = (password.match(/[@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g ).length;
+	*/
+	document.getElementById("passMeasurements").innerHTML = " Password Analysis "
 	document.getElementById("length").innerHTML = " Password length = " + password.length;
 	document.getElementById("number").innerHTML = " Number of Numbers  = " + numOfNumbers;
 	document.getElementById("upper").innerHTML = " Number of uppercase = " + numOfCapitals;
 	document.getElementById("lower").innerHTML = " Number of lowercase = " + numOfLower;
-	//document.getElementById("special").innerHTML = " Number of special = " + numOfSpecial;
 	
+	/* Not working yet, possibly next iteration
+	
+	//document.getElementById("consecutive").innerHTML = " Number of consecutive characters = " + numOfConsecutiveChars;
+	//document.getElementById("special").innerHTML = " Number of special = " + numOfSpecial;
+	*/
 	}
 	else
 	{
 	//failsafe
 	alert("Empty User Input, Please try again");
 	}
+	
+	
+	// set initial requirements that determine the strength of the password (will be tweaked)
+	if (password.length > 10 && numOfCapitals >=3 & numOfLower >=3 & numOfNumbers >=3 )
+	{
+	document.getElementById("onceCalc").innerHTML = "Your Password is: Strong";
+	}
+	else if (password.length < 8 && numOfCapitals <2 & numOfLower <2 & numOfNumbers <2 )
+	{
+		document.getElementById("onceCalc").innerHTML = "Your Password is: Weak";
+	}
+	else if (password.length > 8 && numOfCapitals >=2 & numOfLower >=2 & numOfNumbers >=2 )
+	{
+		document.getElementById("onceCalc").innerHTML = "Your Password is: Medium";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 };
 
 //OpenRepoLink Function
