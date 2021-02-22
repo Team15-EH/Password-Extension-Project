@@ -8,6 +8,15 @@ window.onload = function()
 	passStrengthPage.style.display = "block";
 }
 
+function searchString()
+{
+  var userInput = document.getElementById("passForm");
+
+  var str = "words donkey elephant mouse cow pig";
+  var wordResult = str.includes("userInput");
+  document.write(wordResult);
+}
+
 //Button Listening Function. Listens for "Input Button" clicks and calls the relevant function when they are registered.
 document.addEventListener('DOMContentLoaded', function ()
 {
@@ -49,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function ()
 	{
 		//Runs the Password Checking Function
 		passCheck();
+		searchString();
 	});
 });
 const LOWER_REGEX = /([a-z])/g;
@@ -66,6 +76,10 @@ function passCheck()
 {
 	document.getElementById("passwordTitle").innerHTML = "Your Password is: " + document.getElementById("passForm").value;
 	var password = document.getElementById("passForm").value;
+
+	var str = "words donkey elephant mouse cow pig";
+	var wordResult = str.includes(password);
+	document.write(wordResult);
 
 	var d = new Date().getDate();
 	var m = new Date().getMonth() + 1;
