@@ -193,7 +193,7 @@ form, .content {
 	color: white;
 	background: #5F9EA0;
 	border-radius: 10px;
-	border: 2px solid #000000;	
+	border: 2px solid #000000;
 }
 
 input[type=button] {
@@ -203,13 +203,14 @@ input[type=button] {
 	color: white;
 	background: #5F9EA0;
 	border-radius: 10px;
-	border: 2px solid #000000;	
+	border: 2px solid #000000;
 }
 
 .button-div {
 	text-align:center;
 	float: center;
 }
+
 
 .error {
 	width: 92%;
