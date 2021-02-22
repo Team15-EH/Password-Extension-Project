@@ -8,15 +8,6 @@ window.onload = function()
 	passStrengthPage.style.display = "block";
 }
 
-function searchString()
-{
-  var userInput = document.getElementById("passForm");
-
-  var str = "words donkey elephant mouse cow pig";
-  var wordResult = str.includes("userInput");
-  document.write(wordResult);
-}
-
 //Button Listening Function. Listens for "Input Button" clicks and calls the relevant function when they are registered.
 document.addEventListener('DOMContentLoaded', function ()
 {
@@ -77,6 +68,7 @@ function passCheck()
 	document.getElementById("passwordTitle").innerHTML = "Your Password is: " + document.getElementById("passForm").value;
 	var password = document.getElementById("passForm").value;
 
+	//COMMENT THIS BIT OUT TO FIX
 	var str = "words donkey elephant mouse cow pig";
 	var wordResult = str.includes(password);
 	document.write(wordResult);
