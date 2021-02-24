@@ -1,11 +1,13 @@
 //Set-Up Function. Hides everything but the Password Strength Page & Components on the Extension being opened.
 window.onload = function()
 {
-  passEtiqPage.style.display = "none";
+	passEtiqPage.style.display = "none";
 	threeRandom.style.display = "none";
 	generalTips.style.display = "none";
 	extraSecurity.style.display = "none";
 	passStrengthPage.style.display = "block";
+	analyzerRule.style.display = "none";
+
 }
 
 //Button Listening Function. Listens for "Input Button" clicks and calls the relevant function when they are registered.
@@ -52,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function ()
 		searchString();
 	});
 });
+
 const LOWER_REGEX = /([a-z])/g;
 const UPPER_REGEX = /([A-Z])/g;
 const NUM_REGEX = /([/d])/g;
@@ -61,6 +64,7 @@ var upperMinCount = 2;
 var numMinCount = 2;
 var specialMinCount = 2;
 var passwordMinLength = 8;
+
 //PassCheck Function
 //Still needs checking user input against breached passwords file and the Security Consultant
 function passCheck()
@@ -68,10 +72,16 @@ function passCheck()
 	document.getElementById("passwordTitle").innerHTML = "Your Password is: " + document.getElementById("passForm").value;
 	var password = document.getElementById("passForm").value;
 
-	//COMMENT THIS BIT OUT TO FIX
 	var str = "words donkey elephant mouse cow pig";
 	var wordResult = str.includes(password);
-	document.write(wordResult);
+	if (wordResult == true)
+	{
+		passwordTitle.style.display = "block";
+		document.getElementById("passwordTitle").innerHTML = "THIS PASSWORD IS BREACHED";
+	} else 
+	{
+		passwordTitle.style.display = "none";
+	}
 
 	var d = new Date().getDate();
 	var m = new Date().getMonth() + 1;
@@ -86,7 +96,7 @@ function passCheck()
 	var numOfCapitals = (password.match(UPPER_REGEX) || []).length;
 	var numOfLower= (password.match(LOWER_REGEX) || []).length;
 	var numOfNumbers = (password.match(NUM_REGEX) || []).length;
-  var numOfSpecial = (password.match(SPECIAL_REGEX) || []).length;
+	var numOfSpecial = (password.match(SPECIAL_REGEX) || []).length;
 	/*
 	//var numOfConsecutiveChars = (password.match(/[a-z]\1/ig) || []).length;
 	//var numOfSpecial = (password.match(/[@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g ).length;
@@ -96,7 +106,7 @@ function passCheck()
 	document.getElementById("number").innerHTML = " Number of Numbers  = " + numOfNumbers;
 	document.getElementById("upper").innerHTML = " Number of uppercase = " + numOfCapitals;
 	document.getElementById("lower").innerHTML = " Number of lowercase = " + numOfLower;
-  document.getElementById("special").innerHTML = " Number of special = " + numOfSpecial;
+	document.getElementById("special").innerHTML = " Number of special = " + numOfSpecial;
 
 	/* Not working yet, possibly next iteration
 
