@@ -72,17 +72,24 @@ function passCheck()
 	document.getElementById("passwordTitle").innerHTML = "Your Password is: " + document.getElementById("passForm").value;
 	var password = document.getElementById("passForm").value;
 
-	var str = "words donkey elephant mouse cow pig";
-	var wordResult = str.includes(password);
-	if (wordResult == true)
+	//var str = "words donkey elephant mouse cow pig";
+	//var wordResult = str.includes(password);
+	
+	$.get("sftp://1803117@mayar.abertay.ac.uk/home/1803117/group/words.txt", function(contents)
+	{
+		var hasString = contents.includes(password);
+
+		//document.write(hasString);
+		if (hasString == true)
 	{
 		passwordTitle.style.display = "block";
 		document.getElementById("passwordTitle").innerHTML = "THIS PASSWORD IS BREACHED";
 	}
 	else
-{
+	{
 		passwordTitle.style.display = "none";
 	}
+	})
 
 // sets year that password needs reset too
 	var d = new Date().getDate();
