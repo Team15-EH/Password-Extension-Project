@@ -57,8 +57,8 @@ document.addEventListener('DOMContentLoaded', function ()
 
 const LOWER_REGEX = /([a-z])/g;
 const UPPER_REGEX = /([A-Z])/g;
-const NUM_REGEX = /([/d])/g;
-const SPECIAL_REGEX = /([$&+,:;=?@#|'<>.^*()%!-])/g
+const NUM_REGEX = /([\d])/g;
+const SPECIAL_REGEX = /([$&+,:;=?@#|'<>.^*()%!-])/g;
 var lowerMinCount = 2;
 var upperMinCount = 2;
 var numMinCount = 2;
@@ -78,11 +78,13 @@ function passCheck()
 	{
 		passwordTitle.style.display = "block";
 		document.getElementById("passwordTitle").innerHTML = "THIS PASSWORD IS BREACHED";
-	} else 
-	{
+	}
+	else
+{
 		passwordTitle.style.display = "none";
 	}
 
+// sets year that password needs reset too
 	var d = new Date().getDate();
 	var m = new Date().getMonth() + 1;
 	var y = new Date().getFullYear();
@@ -97,22 +99,17 @@ function passCheck()
 	var numOfLower= (password.match(LOWER_REGEX) || []).length;
 	var numOfNumbers = (password.match(NUM_REGEX) || []).length;
 	var numOfSpecial = (password.match(SPECIAL_REGEX) || []).length;
-	/*
-	//var numOfConsecutiveChars = (password.match(/[a-z]\1/ig) || []).length;
-	//var numOfSpecial = (password.match(/[@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g ).length;
-	*/
-	document.getElementById("passMeasurements").innerHTML = " Password Analysis "
+	var concurrentChars = countLetters(password);
+
+
+
+	document.getElementById("passMeasurements").innerHTML = " Password Analysis ";
 	document.getElementById("length").innerHTML = " Password length = " + password.length;
-	document.getElementById("number").innerHTML = " Number of Numbers  = " + numOfNumbers;
 	document.getElementById("upper").innerHTML = " Number of uppercase = " + numOfCapitals;
 	document.getElementById("lower").innerHTML = " Number of lowercase = " + numOfLower;
+	document.getElementById("number").innerHTML = " Number of numbers  = " + numOfNumbers;
 	document.getElementById("special").innerHTML = " Number of special = " + numOfSpecial;
-
-	/* Not working yet, possibly next iteration
-
-	//document.getElementById("consecutive").innerHTML = " Number of consecutive characters = " + numOfConsecutiveChars;
-	//document.getElementById("special").innerHTML = " Number of special = " + numOfSpecial;
-	*/
+  document.getElementById("concurrent").innerHTML = " Concurrent = " + concurrentChars;
 	}
 	else
 	{
@@ -123,7 +120,7 @@ function passCheck()
 	// set initial requirements that determine the strength of the password (will be tweaked)
 	if ((password.length > passwordMinLength) && (numOfCapitals >= upperMinCount) & (numOfLower >= lowerMinCount) & (numOfNumbers >= numMinCount) & (numOfSpecial >= specialMinCount))
 	{
-			document.getElementById("onceCalc").innerHTML = "Your Password is: Medium";
+		document.getElementById("onceCalc").innerHTML = "Your Password is: Medium";
 	}
 	else if ((password.length > (passwordMinLength + 2)) && (numOfCapitals >= (upperMinCount + 1)) & (numOfLower >= (lowerMinCount + 1)) & (numOfNumbers >= (numMinCount + 1)) & (numOfSpecial >= (specialMinCount + 1)))
 	{
@@ -132,6 +129,31 @@ function passCheck()
   else {
     document.getElementById("onceCalc").innerHTML = "Your Password is: Weak";
   }
+};
+ // Function that counts concurrect characters takes the password string being passed in
+function countLetters(str)
+{
+let tempArr = str.split(''); // creates a new temperary array
+let letters = []; // Counting the letters
+let count = 1; // number of times a character appears in the password in a row
+
+// This function determines if a character is the same as the next character in the password. If it is, it increases the counts
+// if not it does some magic to add the number of letters found to the new array and what letter it was
+for (let i = 0; i < tempArr.length; i++)
+{
+	if (tempArr[i] === tempArr[i+1])
+	{
+	count++
+	}
+else
+	{
+		let value = `${count}${tempArr[i]}`;
+		letters = [...letters,value];
+		count = 1;
+	}
+}
+// returns what it found and joins the array into a string
+	return letters.join(" ");
 };
 
 //OpenRepoLink Function
