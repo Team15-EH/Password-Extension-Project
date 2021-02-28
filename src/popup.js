@@ -69,13 +69,13 @@ var passwordMinLength = 8;
 //Still needs checking user input against breached passwords file and the Security Consultant
 function passCheck()
 {
-	document.getElementById("passwordTitle").innerHTML = "Your Password is: " + document.getElementById("passForm").value;
+	//document.getElementById("passwordTitle").innerHTML = "Your Password is: " + document.getElementById("passForm").value;
 	var password = document.getElementById("passForm").value;
 
 	//var str = "words donkey elephant mouse cow pig";
 	//var wordResult = str.includes(password);
 	
-	$.get("sftp://1803117@mayar.abertay.ac.uk/home/1803117/group/words.txt", function(contents)
+	$.get("https://mayar.abertay.ac.uk/~cmp311g20eh15/words.txt", function(contents)
 	{
 		var hasString = contents.includes(password);
 
