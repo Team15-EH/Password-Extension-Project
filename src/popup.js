@@ -167,7 +167,7 @@ function passCheck()
 
 
 //  document.getElementById("concurrent").innerHTML = " Concurrent = " + concurrentChars;
-	document.getElementById("pwdStr").innerHTML = " Password Stength = " + passwordStrength + "%";
+	//
 	}
 	else
 	{
@@ -179,19 +179,55 @@ function passCheck()
 
 	if (passwordStrength == 100)
 	{
-		document.getElementById("onceCalc").innerHTML = "Your Password is: Very Strong";
+		document.getElementById("onceCalc").innerHTML = "";
+		document.getElementById("strong").innerHTML = "";
+		document.getElementById("medium").innerHTML = "";
+		document.getElementById("weak").innerHTML = "";
+		document.getElementById("pwdStr4").innerHTML = "";
+		document.getElementById("pwdStr2").innerHTML = "";
+		document.getElementById("pwdStr3").innerHTML = "";
+		
+		document.getElementById("veryStrong").innerHTML = "Your Password is: Very Strong";
+		document.getElementById("pwdStr1").innerHTML = " Password Stength = " + passwordStrength + "%";
 	}
 	else if (passwordStrength >= 80)
 	{
-		document.getElementById("onceCalc").innerHTML = "Your Password is: Strong";
+		document.getElementById("onceCalc").innerHTML = "";
+		document.getElementById("veryStrong").innerHTML = "";
+		document.getElementById("medium").innerHTML = "";
+		document.getElementById("weak").innerHTML = "";
+		document.getElementById("pwdStr1").innerHTML = "";
+		document.getElementById("pwdStr4").innerHTML = "";
+		document.getElementById("pwdStr3").innerHTML = "";
+		
+		document.getElementById("strong").innerHTML = "Your Password is: Strong";
+		document.getElementById("pwdStr2").innerHTML = " Password Stength = " + passwordStrength + "%";
 	}
 	else if (passwordStrength >= 35)
 	{
-		document.getElementById("onceCalc").innerHTML = "Your Password is: Medium";
+		document.getElementById("onceCalc").innerHTML = "";
+		document.getElementById("veryStrong").innerHTML = "";
+		document.getElementById("strong").innerHTML = "";
+		document.getElementById("weak").innerHTML = "";
+		document.getElementById("pwdStr1").innerHTML = "";
+		document.getElementById("pwdStr2").innerHTML = "";
+		document.getElementById("pwdStr4").innerHTML = "";
+		
+		document.getElementById("medium").innerHTML = "Your Password is: Medium";
+		document.getElementById("pwdStr3").innerHTML = " Password Stength = " + passwordStrength + "%";
 	}
   else
 	{
-    document.getElementById("onceCalc").innerHTML = "Your Password is: Weak";
+		document.getElementById("onceCalc").innerHTML = "";
+		document.getElementById("veryStrong").innerHTML = "";
+		document.getElementById("strong").innerHTML = "";
+		document.getElementById("medium").innerHTML = "";
+		document.getElementById("pwdStr1").innerHTML = "";
+		document.getElementById("pwdStr2").innerHTML = "";
+		document.getElementById("pwdStr3").innerHTML = "";
+		
+		document.getElementById("weak").innerHTML = "Your Password is: Weak";
+		document.getElementById("pwdStr4").innerHTML = " Password Stength = " + passwordStrength + "%";
   }
 };
 
