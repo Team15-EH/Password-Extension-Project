@@ -74,7 +74,7 @@ function passCheck()
 
 	//var str = "words donkey elephant mouse cow pig";
 	//var wordResult = str.includes(password);
-	
+
 	$.get("https://mayar.abertay.ac.uk/~cmp311g20eh15/words.txt", function(contents)
 	{
 		var hasString = contents.includes(password);
@@ -107,16 +107,67 @@ function passCheck()
 	var numOfNumbers = (password.match(NUM_REGEX) || []).length;
 	var numOfSpecial = (password.match(SPECIAL_REGEX) || []).length;
 	var concurrentChars = countLetters(password);
+	var negativeFactor = determineNegativeFactor(numOfCapitals, numOfLower, numOfNumbers, numOfSpecial, concurrentChars);
+	var passwordStrength = 0 + (password.length * 4) + ((password.length - numOfCapitals) * 2) + ((password.length - numOfLower) * 2) + (numOfNumbers * 4) + (numOfSpecial * 6) + negativeFactor;
 
+	if (numOfSpecial == 0)
+	{
+		passwordStrength = passwordStrength / 2;
+	}
 
+	if (passwordStrength > 100)
+	{
+		passwordStrength = 100;
+	}
+	else if (passwordStrength < 0)
+	{
+		passwordStrength = 0;
+	}
 
 	document.getElementById("passMeasurements").innerHTML = " Password Analysis ";
-	document.getElementById("length").innerHTML = " Password length = " + password.length;
-	document.getElementById("upper").innerHTML = " Number of uppercase = " + numOfCapitals;
-	document.getElementById("lower").innerHTML = " Number of lowercase = " + numOfLower;
-	document.getElementById("number").innerHTML = " Number of numbers  = " + numOfNumbers;
-	document.getElementById("special").innerHTML = " Number of special = " + numOfSpecial;
-  document.getElementById("concurrent").innerHTML = " Concurrent = " + concurrentChars;
+	//document.getElementById("length").innerHTML = " Password length = " + password.length;
+	if (numOfCapitals == 0)
+	{
+			document.getElementById("upper").innerHTML = " Your password contains no capital letters";
+	}
+	else
+	{
+		document.getElementById("upper").innerHTML = " ";
+	}
+
+
+	if (numOfLower == 0)
+	{
+		document.getElementById("lower").innerHTML = " Your password contains no lower case letters";
+	}
+	else
+	{
+			document.getElementById("lower").innerHTML = " ";
+	}
+
+
+
+	if (numOfNumbers == 0)
+	{
+		document.getElementById("number").innerHTML = " Your password contains no numbers";
+	}
+	else
+	{
+		document.getElementById("number").innerHTML = " ";
+	}
+
+	if (numOfSpecial == 0)
+	{
+		document.getElementById("special").innerHTML = " Your password contains no special characters";
+	}
+	else
+	{
+		document.getElementById("special").innerHTML = " ";
+	}
+
+
+//  document.getElementById("concurrent").innerHTML = " Concurrent = " + concurrentChars;
+	document.getElementById("pwdStr").innerHTML = " Password Stength = " + passwordStrength + "%";
 	}
 	else
 	{
@@ -125,25 +176,55 @@ function passCheck()
 	}
 
 	// set initial requirements that determine the strength of the password (will be tweaked)
-	if ((password.length > passwordMinLength) && (numOfCapitals >= upperMinCount) & (numOfLower >= lowerMinCount) & (numOfNumbers >= numMinCount) & (numOfSpecial >= specialMinCount))
+
+	if (passwordStrength == 100)
 	{
-		document.getElementById("onceCalc").innerHTML = "Your Password is: Medium";
+		document.getElementById("onceCalc").innerHTML = "Your Password is: Very Strong";
 	}
-	else if ((password.length > (passwordMinLength + 2)) && (numOfCapitals >= (upperMinCount + 1)) & (numOfLower >= (lowerMinCount + 1)) & (numOfNumbers >= (numMinCount + 1)) & (numOfSpecial >= (specialMinCount + 1)))
+	else if (passwordStrength >= 80)
 	{
 		document.getElementById("onceCalc").innerHTML = "Your Password is: Strong";
 	}
-  else {
+	else if (passwordStrength >= 35)
+	{
+		document.getElementById("onceCalc").innerHTML = "Your Password is: Medium";
+	}
+  else
+	{
     document.getElementById("onceCalc").innerHTML = "Your Password is: Weak";
   }
 };
+
+function determineNegativeFactor(cap, low, num, speci,conc)
+{
+	let factor = 0;
+	if ((cap > 0) && (low > 0) && (num == 0) && (speci ==0))
+	{
+		factor = factor - (cap + low);
+	}
+	else if ((cap == 0) && (low == 0) && (num > 0) && (speci == 0))
+	{
+		factor = factor - num;
+	}
+
+	if (conc > 2)
+	{
+		factor = factor - (conc * 3);
+	}
+
+	return factor;
+
+}
+
+
+
  // Function that counts concurrect characters takes the password string being passed in
 function countLetters(str)
 {
 let tempArr = str.split(''); // creates a new temperary array
 let letters = []; // Counting the letters
 let count = 1; // number of times a character appears in the password in a row
-
+let highestCount = 0;
 // This function determines if a character is the same as the next character in the password. If it is, it increases the counts
 // if not it does some magic to add the number of letters found to the new array and what letter it was
 for (let i = 0; i < tempArr.length; i++)
@@ -156,11 +237,16 @@ else
 	{
 		let value = `${count}${tempArr[i]}`;
 		letters = [...letters,value];
+		if (count > highestCount)
+		{
+			highestCount = count;
+		}
 		count = 1;
 	}
 }
 // returns what it found and joins the array into a string
-	return letters.join(" ");
+return highestCount;
+//	return letters.join(" ");
 };
 
 //OpenRepoLink Function
