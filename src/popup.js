@@ -20,6 +20,16 @@ document.addEventListener('DOMContentLoaded', function ()
 	var extraSecurityButton = document.getElementById("extraSecurityButton");
 	var repoLinkButton = document.getElementById("repoLinkButton");
 	var passCheckButton = document.getElementById("passCheckButton");
+	var addToCalendar = document.getElementById("addToCalendar")
+
+
+
+// add to calendar call
+addToCalendar.addEventListener('click', function()
+{
+	openGoogleCal();
+}
+)
 
 	//Adding each of the "Input Button Listeners"
     passPageButton.addEventListener('click', function()
@@ -186,7 +196,7 @@ function passCheck()
 		document.getElementById("pwdStr4").innerHTML = "";
 		document.getElementById("pwdStr2").innerHTML = "";
 		document.getElementById("pwdStr3").innerHTML = "";
-		
+
 		document.getElementById("veryStrong").innerHTML = "Your Password is: Very Strong";
 		document.getElementById("pwdStr1").innerHTML = " Password Stength = " + passwordStrength + "%";
 	}
@@ -199,7 +209,7 @@ function passCheck()
 		document.getElementById("pwdStr1").innerHTML = "";
 		document.getElementById("pwdStr4").innerHTML = "";
 		document.getElementById("pwdStr3").innerHTML = "";
-		
+
 		document.getElementById("strong").innerHTML = "Your Password is: Strong";
 		document.getElementById("pwdStr2").innerHTML = " Password Stength = " + passwordStrength + "%";
 	}
@@ -212,7 +222,7 @@ function passCheck()
 		document.getElementById("pwdStr1").innerHTML = "";
 		document.getElementById("pwdStr2").innerHTML = "";
 		document.getElementById("pwdStr4").innerHTML = "";
-		
+
 		document.getElementById("medium").innerHTML = "Your Password is: Medium";
 		document.getElementById("pwdStr3").innerHTML = " Password Stength = " + passwordStrength + "%";
 	}
@@ -225,7 +235,7 @@ function passCheck()
 		document.getElementById("pwdStr1").innerHTML = "";
 		document.getElementById("pwdStr2").innerHTML = "";
 		document.getElementById("pwdStr3").innerHTML = "";
-		
+
 		document.getElementById("weak").innerHTML = "Your Password is: Weak";
 		document.getElementById("pwdStr4").innerHTML = " Password Stength = " + passwordStrength + "%";
   }
@@ -290,6 +300,14 @@ function openRepoLink()
 {
 		//Opens the supplied URL in a new tab
 	    var newURL = "https://github.com/Team15-EH/Password-Extension-Project";
+        chrome.tabs.create({ url: newURL });
+}
+
+//OpenRepoLink Function
+function openGoogleCal()
+{
+		//Opens the supplied URL in a new tab
+	    var newURL = "https://calendar.google.com/calendar/u/0/r/eventedit?text=Change+Password&details=Project+Perfect+Password+recommends+that+you+change+your+password+as+it%27s+been+6+months!";
         chrome.tabs.create({ url: newURL });
 }
 
