@@ -5,11 +5,13 @@
   "version": "1.0",
   "description": "Project Perfect Password Extension",
 
-  "browser_action": {
+  "browser_action": 
+  {
         "default_popup": "popup.html",
         "default_icon": "icon.png"
-      },
-    "permissions": [
+  },
+  "permissions": [
     "activeTab"
-    ]
+	]
+	
 }
