@@ -75,7 +75,7 @@ function passCheck()
 	//var str = "words donkey elephant mouse cow pig";
 	//var wordResult = str.includes(password);
 
-	$.get("https://mayar.abertay.ac.uk/~cmp311g20eh15/words.txt", function(contents)
+	$.get("https://raw.githubusercontent.com/Team15-EH/Password-Extension-Project/main/src/10k_pass_file.txt", function(contents)
 	{
 		var hasString = contents.includes(password);
 
