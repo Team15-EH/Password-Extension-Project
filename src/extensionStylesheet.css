@@ -248,11 +248,11 @@ input[type=button] {
 
 
 
-#upper ,#lower , #number, #special , #pwdStr4 , #weak {
+#upper , #lower , #number, #special, #concurrent {
 	color:red;
 }
 
-
+/*
 #medium , #pwdStr3  {
 	color:#FCFF00;
 }
@@ -263,6 +263,4 @@ input[type=button] {
 
 #veryStrong , #pwdStr1 {
 	color:#0aff00;
-}
-
-
+}*/

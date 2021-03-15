@@ -77,8 +77,7 @@ var passwordMinLength = 8;
 
 //PassCheck Function
 //Still needs checking user input against breached passwords file and the Security Consultant
-function passCheck()
-{
+function passCheck(){
 	//document.getElementById("passwordTitle").innerHTML = "Your Password is: " + document.getElementById("passForm").value;
 	var password = document.getElementById("passForm").value;
 
@@ -110,190 +109,199 @@ function passCheck()
 
 
 	// Disect password to see what it contains
-	if (password.length > 0)
-	{
-	var numOfCapitals = (password.match(UPPER_REGEX) || []).length;
-	var numOfLower= (password.match(LOWER_REGEX) || []).length;
-	var numOfNumbers = (password.match(NUM_REGEX) || []).length;
-	var numOfSpecial = (password.match(SPECIAL_REGEX) || []).length;
-	var concurrentChars = countLetters(password);
-	var negativeFactor = determineNegativeFactor(numOfCapitals, numOfLower, numOfNumbers, numOfSpecial, concurrentChars);
-	var passwordStrength = 0 + (password.length * 4) + ((password.length - numOfCapitals) * 2) + ((password.length - numOfLower) * 2) + (numOfNumbers * 4) + (numOfSpecial * 6) + negativeFactor;
+if (password.length > 0)
+{
+ 		var numOfCapitals = (password.match(UPPER_REGEX) || []).length;
+		var numOfLower= (password.match(LOWER_REGEX) || []).length;
+		var numOfNumbers = (password.match(NUM_REGEX) || []).length;
+		var numOfSpecial = (password.match(SPECIAL_REGEX) || []).length;
 
-	if (numOfSpecial == 0)
-	{
-		passwordStrength = passwordStrength / 2;
-	}
+		var concurrentCharsFactor = countLetters(password);
+		var negativeFactor = determineNegativeFactor(numOfCapitals, numOfLower, numOfNumbers, numOfSpecial, concurrentCharsFactor);
+		var passwordStrength = 0 + (password.length * 4) + ((password.length - numOfCapitals) * 2) + ((password.length - numOfLower) * 2) + (numOfNumbers * 4) + (numOfSpecial * 6 ) +  negativeFactor;
 
-	if (passwordStrength > 100)
-	{
-		passwordStrength = 100;
-	}
-	else if (passwordStrength < 0)
-	{
-		passwordStrength = 0;
-	}
+		if (numOfSpecial == 0)
+		{
+			passwordStrength = passwordStrength / 2;
+		}
+		else if (numOfSpecial == 1)
+		{
+			passwordStrength = passwordStrength / 1.125
+		}
 
-	document.getElementById("passMeasurements").innerHTML = " Password Analysis ";
-	//document.getElementById("length").innerHTML = " Password length = " + password.length;
+		if (passwordStrength > 100)
+		{
+			passwordStrength = 100;
+		}
+		else if (passwordStrength < 0)
+		{
+			passwordStrength = 0;
+		}
+		passwordStrength = Math.round(passwordStrength)
+
+
+		document.getElementById("passMeasurements").innerHTML = " Password Analysis ";
+		//document.getElementById("length").innerHTML = " Password length = " + password.length;
+
 	if (numOfCapitals == 0)
 	{
 			document.getElementById("upper").innerHTML = " Your password contains no capital letters";
 	}
 	else
 	{
-		document.getElementById("upper").innerHTML = " ";
+			document.getElementById("upper").innerHTML = " ";
 	}
-
 
 	if (numOfLower == 0)
 	{
-		document.getElementById("lower").innerHTML = " Your password contains no lower case letters";
+			document.getElementById("lower").innerHTML = " Your password contains no lower case letters";
 	}
 	else
 	{
 			document.getElementById("lower").innerHTML = " ";
 	}
 
+	switch (numOfNumbers){
+		case 0:
+			document.getElementById("number").innerHTML = " Your password contains no number characters, consider adding a few";
+			break;
+		case 1:
+			document.getElementById("number").innerHTML = " Your password contains only one number character, consider adding at least one more";
+			break;
+		default:
+			document.getElementById("number").innerHTML = " ";
+		}
 
-
-	if (numOfNumbers == 0)
-	{
-		document.getElementById("number").innerHTML = " Your password contains no numbers";
-	}
-	else
-	{
-		document.getElementById("number").innerHTML = " ";
-	}
-
-	if (numOfSpecial == 0)
-	{
-		document.getElementById("special").innerHTML = " Your password contains no special characters";
-	}
-	else
-	{
-		document.getElementById("special").innerHTML = " ";
-	}
-
-
-//  document.getElementById("concurrent").innerHTML = " Concurrent = " + concurrentChars;
-	//
-	}
-	else
-	{
+		switch (numOfSpecial){
+			case 0:
+				document.getElementById("special").innerHTML = " Your password contains no special characters, consider adding a few";
+				break;
+			case 1:
+				document.getElementById("special").innerHTML = " Your password contains only one special character, consider adding at least one more";
+				break;
+			default:
+				document.getElementById("special").innerHTML = " ";
+			}
+			switch (concurrentCharsFactor){
+				case 0:
+					document.getElementById("concurrent").innerHTML = " Your password contains too many concurrent characters, try to not have 3 of the same character in a row";
+					break;
+				case 1:
+					document.getElementById("concurrent").innerHTML = " Your password contains a segment where there are 3 of the same characters in a row, consider changing this";
+					break;
+				default:
+					document.getElementById("special").innerHTML = " ";
+				}
+	
+}
+else
+{
 	//failsafe
 	alert("Empty User Input, Please try again");
-	}
+}
+
 
 	// set initial requirements that determine the strength of the password (will be tweaked)
 
-	if (passwordStrength == 100)
-	{
-		document.getElementById("onceCalc").innerHTML = "";
-		document.getElementById("strong").innerHTML = "";
-		document.getElementById("medium").innerHTML = "";
-		document.getElementById("weak").innerHTML = "";
-		document.getElementById("pwdStr4").innerHTML = "";
-		document.getElementById("pwdStr2").innerHTML = "";
-		document.getElementById("pwdStr3").innerHTML = "";
+if (passwordStrength == 100)
+{
+		document.getElementById("passwordStrengthText").innerHTML = "Your Password is: Very Strong";
+		document.getElementById("passwordStrengthText").style.color = "Lime";
+		document.getElementById("passwordStrengthScore").innerHTML = " Password Stength = " + passwordStrength + "%";
+		document.getElementById("passwordStrengthScore").style.color = "Lime";
+}
+else if (passwordStrength >= 80)
+{
+		document.getElementById("passwordStrengthText").innerHTML = "Your Password is: Strong";
+		document.getElementById("passwordStrengthText").style.color = "Green";
+		document.getElementById("passwordStrengthScore").innerHTML = " Password Stength = " + passwordStrength + "%";
+		document.getElementById("passwordStrengthScore").style.color = "Green";
+}
+else if (passwordStrength >= 35)
+{
+		document.getElementById("passwordStrengthText").innerHTML = "Your Password is: Medium";
+		document.getElementById("passwordStrengthText").style.color = "Yellow";
+		document.getElementById("passwordStrengthScore").innerHTML = " Password Stength = " + passwordStrength + "%";
+		document.getElementById("passwordStrengthScore").style.color = "Yellow";
+}
+else
+{
+		document.getElementById("passwordStrengthText").innerHTML = "Your Password is: Weak";
+		document.getElementById("passwordStrengthText").style.color = "Red";
+		document.getElementById("passwordStrengthScore").innerHTML = " Password Stength = " + passwordStrength + "%";
+		document.getElementById("passwordStrengthScore").style.color = "Red";
+}
+}
 
-		document.getElementById("veryStrong").innerHTML = "Your Password is: Very Strong";
-		document.getElementById("pwdStr1").innerHTML = " Password Stength = " + passwordStrength + "%";
-	}
-	else if (passwordStrength >= 80)
-	{
-		document.getElementById("onceCalc").innerHTML = "";
-		document.getElementById("veryStrong").innerHTML = "";
-		document.getElementById("medium").innerHTML = "";
-		document.getElementById("weak").innerHTML = "";
-		document.getElementById("pwdStr1").innerHTML = "";
-		document.getElementById("pwdStr4").innerHTML = "";
-		document.getElementById("pwdStr3").innerHTML = "";
-
-		document.getElementById("strong").innerHTML = "Your Password is: Strong";
-		document.getElementById("pwdStr2").innerHTML = " Password Stength = " + passwordStrength + "%";
-	}
-	else if (passwordStrength >= 35)
-	{
-		document.getElementById("onceCalc").innerHTML = "";
-		document.getElementById("veryStrong").innerHTML = "";
-		document.getElementById("strong").innerHTML = "";
-		document.getElementById("weak").innerHTML = "";
-		document.getElementById("pwdStr1").innerHTML = "";
-		document.getElementById("pwdStr2").innerHTML = "";
-		document.getElementById("pwdStr4").innerHTML = "";
-
-		document.getElementById("medium").innerHTML = "Your Password is: Medium";
-		document.getElementById("pwdStr3").innerHTML = " Password Stength = " + passwordStrength + "%";
-	}
-  else
-	{
-		document.getElementById("onceCalc").innerHTML = "";
-		document.getElementById("veryStrong").innerHTML = "";
-		document.getElementById("strong").innerHTML = "";
-		document.getElementById("medium").innerHTML = "";
-		document.getElementById("pwdStr1").innerHTML = "";
-		document.getElementById("pwdStr2").innerHTML = "";
-		document.getElementById("pwdStr3").innerHTML = "";
-
-		document.getElementById("weak").innerHTML = "Your Password is: Weak";
-		document.getElementById("pwdStr4").innerHTML = " Password Stength = " + passwordStrength + "%";
-  }
-};
-
-function determineNegativeFactor(cap, low, num, speci,conc)
+function determineNegativeFactor(_Pcapital, _Plower, _Pnumber, _Pspecial, _Pconcurrent)
 {
 	let factor = 0;
-	if ((cap > 0) && (low > 0) && (num == 0) && (speci ==0))
+
+	if ((_Pcapital > 0) && (_Plower > 0) && (_Pnumber == 0) && (_Pspecial ==0))
 	{
-		factor = factor - (cap + low);
+		factor = factor - (capital + lower);
 	}
-	else if ((cap == 0) && (low == 0) && (num > 0) && (speci == 0))
+	else if ((_Pcapital == 0) && (_Plower == 0) && (_Pnumber > 0) && (_Pspecial == 0))
 	{
-		factor = factor - num;
+		factor = factor - _Pnumber;
 	}
 
-	if (conc > 2)
+	if (_Pconcurrent > 0)
 	{
-		factor = factor - (conc * 3);
+		factor = factor - _Pconcurrent;
 	}
 
 	return factor;
-
-}
+};
 
 
 
  // Function that counts concurrect characters takes the password string being passed in
-function countLetters(str)
-{
-let tempArr = str.split(''); // creates a new temperary array
+function countLetters(_Pstr){
+
+let password = _Pstr.split(''); // creates a new temperary array
 let letters = []; // Counting the letters
-let count = 1; // number of times a character appears in the password in a row
+let currentLetterCount = 1; // number of times a character appears in the password in a row
 let highestCount = 0;
+let totalConcurrentCharactersHigherThanTwo = 0;
+let totalConcurrentCharactersHigherThanFour = 0;
+let factor = 0;
 // This function determines if a character is the same as the next character in the password. If it is, it increases the counts
 // if not it does some magic to add the number of letters found to the new array and what letter it was
-for (let i = 0; i < tempArr.length; i++)
+for (let i = 0; i < password.length; i++)
 {
-	if (tempArr[i] === tempArr[i+1])
+	if (password[i] === password[i+1])
 	{
-	count++
+	currentLetterCount++
 	}
-else
+	else
 	{
-		let value = `${count}${tempArr[i]}`;
+		let value = `${currentLetterCount}${password[i]}`;
 		letters = [...letters,value];
-		if (count > highestCount)
+
+		if (currentLetterCount >= 4)
 		{
-			highestCount = count;
+			totalConcurrentCharactersHigherThanFour++;
+			if (highestCount < currentLetterCount)
+			{
+				highestCount = currentLetterCount;
+			}
 		}
-		count = 1;
+		else if (currentLetterCount == 3)
+		{
+			totalConcurrentCharactersHigherThanTwo++;
+		}
+		currentLetterCount = 1;
 	}
+
+
 }
 // returns what it found and joins the array into a string
-return highestCount;
-//	return letters.join(" ");
-};
+//return highestCount;
+//return letters.join(" ");
+factor = (40 * totalConcurrentCharactersHigherThanFour) + (20 * totalConcurrentCharactersHigherThanTwo) + (10 * highestCount);
+return factor;
+}
 
 //OpenRepoLink Function
 function openRepoLink()
