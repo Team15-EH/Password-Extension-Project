@@ -251,9 +251,9 @@ if (passwordStrength == 100)
 else if (passwordStrength >= 80)
 {
 		document.getElementById("passwordStrengthText").innerHTML = "Your Password is: Strong";
-		document.getElementById("passwordStrengthText").style.color = "Green";
+		document.getElementById("passwordStrengthText").style.color = "MediumSpringGreen";
 		document.getElementById("passwordStrengthScore").innerHTML = " Password Stength = " + passwordStrength + "%";
-		document.getElementById("passwordStrengthScore").style.color = "Green";
+		document.getElementById("passwordStrengthScore").style.color = "MediumSpringGreen";
 }
 else if (passwordStrength >= 35)
 {
