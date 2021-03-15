@@ -124,7 +124,7 @@ if (password.length > 0)
 		var concurrentCharsFactor = countLetters(password);
 		var negativeFactor = determineNegativeFactor(numOfCapitals, numOfLower, numOfNumbers, numOfSpecial, concurrentCharsFactor);
 		var passwordStrength = 0 + (password.length * 4) + ((password.length - numOfCapitals) * 2) + ((password.length - numOfLower) * 2) + (numOfNumbers * 4) + (numOfSpecial * 6 ) +  negativeFactor;
-
+		document.getElementById("onceCalc").innerHTML="";
 		if (numOfSpecial == 0)
 		{
 			passwordStrength = passwordStrength / 2;
