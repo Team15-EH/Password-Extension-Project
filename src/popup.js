@@ -57,6 +57,11 @@ addToCalendar.addEventListener('click', function()
 		//Runs a function providing a link to the Github Repository
 		openRepoLink();
 	});
+	NCSCButton.addEventListener('click', function()
+	{
+		//Runs a function providing a link to the Github Repository
+		openNCSCLink();
+	});
 	passCheckButton.addEventListener('click', function()
 	{
 		//Runs the Password Checking Function
@@ -358,7 +363,7 @@ function openGoogleCal()
 }
 
 //OpenNCSCLink Function
-function openRepoLink()
+function openNCSCLink()
 {
 		//Opens the supplied URL in a new tab
 	    var newURL = "https://www.ncsc.gov.uk/";
