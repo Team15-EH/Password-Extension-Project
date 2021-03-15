@@ -60,23 +60,29 @@
          <!-- Just holds the page title. -->
          <div>
             <hr>
-            <h3>Password Etiquette</h3>
+            <h3 align="center">Password Etiquette</h3>
             <hr>
          </div>
          <!-- Holds the information buttons. Buttons must be made as "input" as standard buttons dont work in extensions.  -->
          <!-- Pressing these changes what information is displayed. Could potentially add more buttons and info? -->
          <div id="passEtiqButtons" align="center">
-            <input type='button' id='threeWordsButton' value='3 Random Words Approach'>
+            <input type='button' id='threeWordsButton' value='3 Random Words'>
             <input type='button' id='generalTipsButton' value='General Tips'>
             <input type='button' id='extraSecurityButton' value='Extra Security'>
+			<input type='button' id='NCSCButton' value='NCSC Link'>
          </div>
          <hr>
-         <!-- Basic summary of password security and its importance. Currently just filled with placeholder Lorem Ipsum text. -->
+         <!-- Basic summary of password security and its importance. -->
          <div id="passSecuritySummary">
-            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-               Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-               Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            <p>In the current day and age password security should be of concern
+			to all, and Team15 are committed to helping spread awareness of what 
+			makes a good password. This page contains information & tips on password security
+			as well as a link to the NCSC (National Cyber Security Centre), the main source of 
+			our knowledge.
+			</p>
+			<p>
+			Already a password wizard? Check out our Extra Security section to see how you ca raise your
+			password game to the next level!
             </p>
          </div>
          <!-- Basic Summary of the NCSC Three Random Word Approach. Can be added to and linked to in future? -->
@@ -122,7 +128,7 @@
          <form>
             <!-- Password Input box. Takes user input and displays it in the top "Password Strength" section so far. -->
             <!-- Will be used with all other sections later -->
-            <input type="password" name="pswd" id="passForm" placeholder="Password">
+            <input type="password" align="center" name="pswd" id="passForm" placeholder="Password">
             <!-- Page navigation buttons. Needs to be kept as "Input" or they will break. -->
             <ul>
                <li>

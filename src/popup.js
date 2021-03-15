@@ -349,11 +349,19 @@ function openRepoLink()
         chrome.tabs.create({ url: newURL });
 }
 
-//OpenRepoLink Function
+//OpenGoogleCalendar Function
 function openGoogleCal()
 {
 		//Opens the supplied URL in a new tab
 	    var newURL = "https://calendar.google.com/calendar/u/0/r/eventedit?text=Change+Password&details=Project+Perfect+Password+recommends+that+you+change+your+password+as+it%27s+been+6+months!";
+        chrome.tabs.create({ url: newURL });
+}
+
+//OpenNCSCLink Function
+function openRepoLink()
+{
+		//Opens the supplied URL in a new tab
+	    var newURL = "https://www.ncsc.gov.uk/";
         chrome.tabs.create({ url: newURL });
 }
 
