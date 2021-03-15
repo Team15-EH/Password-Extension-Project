@@ -141,58 +141,96 @@ if (password.length > 0)
 
 
 		document.getElementById("passMeasurements").innerHTML = " Password Analysis ";
-		//document.getElementById("length").innerHTML = " Password length = " + password.length;
+
+	if (password.length > 11)
+	{
+			document.getElementById("length").innerHTML = "Your password has a strong length";
+			document.getElementById("length").style.color = "Lime";
+	}
+	else if (password.length > 7)
+	{
+		document.getElementById("length").innerHTML = "Your password has a decent length, it could be longer. Increasing the length is the biggest factor in improving security";
+		document.getElementById("length").style.color = "Yellow";
+	}
+	else
+	{
+		document.getElementById("length").innerHTML = "Your password has is very short. Increasing the length is the biggest factor in improving security";
+		document.getElementById("length").style.color = "Red";
+	}
+
+
 
 	if (numOfCapitals == 0)
 	{
 			document.getElementById("upper").innerHTML = " Your password contains no capital letters";
+			document.getElementById("upper").style.color = "Red";
 	}
 	else
 	{
-			document.getElementById("upper").innerHTML = " ";
+			document.getElementById("upper").innerHTML = "Your password contains a capital letter";
+			document.getElementById("upper").style.color = "Lime";
 	}
 
 	if (numOfLower == 0)
 	{
 			document.getElementById("lower").innerHTML = " Your password contains no lower case letters";
+			document.getElementById("lower").style.color = "Red";
 	}
 	else
 	{
-			document.getElementById("lower").innerHTML = " ";
+		document.getElementById("lower").innerHTML = "Your password contains a lower case letter";
+		document.getElementById("lower").style.color = "Lime";
 	}
 
 	switch (numOfNumbers){
 		case 0:
 			document.getElementById("number").innerHTML = " Your password contains no number characters, consider adding a few";
+			document.getElementById("number").style.color = "Red";
 			break;
 		case 1:
-			document.getElementById("number").innerHTML = " Your password contains only one number character, consider adding at least one more";
+			document.getElementById("number").innerHTML = " Your password contains only one number character, consider adding a few more";
+				document.getElementById("number").style.color = "Yellow";
 			break;
+			case 2:
+				document.getElementById("number").innerHTML = " Your password contains only two numbers, consider adding at least one more";
+				document.getElementById("number").style.color = "Yellow";
+				break;
 		default:
-			document.getElementById("number").innerHTML = " ";
+			document.getElementById("number").innerHTML = "Your password contains a strong amount of numbers ";
+			document.getElementById("number").style.color = "Lime";
 		}
 
 		switch (numOfSpecial){
 			case 0:
 				document.getElementById("special").innerHTML = " Your password contains no special characters, consider adding a few";
+				document.getElementById("special").style.color = "Red";
 				break;
 			case 1:
 				document.getElementById("special").innerHTML = " Your password contains only one special character, consider adding at least one more";
+				document.getElementById("special").style.color = "Yellow";
 				break;
 			default:
-				document.getElementById("special").innerHTML = " ";
+				document.getElementById("special").innerHTML = "Your password contains a strong amount of special characters";
+				document.getElementById("special").style.color = "Lime";
 			}
-			switch (concurrentCharsFactor){
-				case 0:
-					document.getElementById("concurrent").innerHTML = " Your password contains too many concurrent characters, try to not have 3 of the same character in a row";
-					break;
-				case 1:
-					document.getElementById("concurrent").innerHTML = " Your password contains a segment where there are 3 of the same characters in a row, consider changing this";
-					break;
-				default:
-					document.getElementById("special").innerHTML = " ";
-				}
-	
+
+			if (concurrentCharsFactor == 20)
+			{
+					document.getElementById("concurrent").innerHTML = " Your password contains 3 of the same characters in a row, try to not have more than two concurrent characters";
+					document.getElementById("concurrent").style.color = "Yellow";
+			}
+			else if (concurrentCharsFactor > 20)
+			{
+					document.getElementById("concurrent").innerHTML = " Your password contains many concurrent characters, this should be changed as it makes a password easier to brute force";
+					document.getElementById("concurrent").style.color = "Red";
+			}
+			else
+			{
+				document.getElementById("concurrent").innerHTML = "Your password contains no sets of 3 characters in a row ";
+				document.getElementById("concurrent").style.color = "Lime";
+
+			}
+
 }
 else
 {
