@@ -1,13 +1,14 @@
 //Set-Up Function. Hides everything but the Password Strength Page & Components on the Extension being opened.
 window.onload = function()
 {
+	colourBackground.style.display = "none";
+	bruteForceEstimation.style.display = "none";
+	onceCalc.style.display = "block";
 	passEtiqPage.style.display = "none";
 	threeRandom.style.display = "none";
 	generalTips.style.display = "none";
 	extraSecurity.style.display = "none";
 	passStrengthPage.style.display = "block";
-	analyzerRule.style.display = "none";
-
 }
 
 //Button Listening Function. Listens for "Input Button" clicks and calls the relevant function when they are registered.
@@ -21,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function ()
 	var repoLinkButton = document.getElementById("repoLinkButton");
 	var passCheckButton = document.getElementById("passCheckButton");
 	var addToCalendar = document.getElementById("addToCalendar")
-
 
 
 // add to calendar call
@@ -82,12 +82,14 @@ var passwordMinLength = 8;
 
 //PassCheck Function
 //Still needs checking user input against breached passwords file and the Security Consultant
-function passCheck(){
-	//document.getElementById("passwordTitle").innerHTML = "Your Password is: " + document.getElementById("passForm").value;
+function passCheck()
+{
+	onceCalc.style.display = "none";
 	var password = document.getElementById("passForm").value;
+	
 
-	//var str = "words donkey elephant mouse cow pig";
-	//var wordResult = str.includes(password);
+	colourBackground.style.display = "block";
+	bruteForceEstimation.style.display = "block";
 
 	$.get("https://raw.githubusercontent.com/Team15-EH/Password-Extension-Project/main/src/10k_pass_file.txt", function(contents)
 	{
@@ -96,8 +98,11 @@ function passCheck(){
 		//document.write(hasString);
 		if (hasString == true)
 	{
-		passwordTitle.style.display = "block";
+		onceCalc.style.display = "none";
+		passwordTitle.style.color = "maroon";
 		document.getElementById("passwordTitle").innerHTML = "THIS PASSWORD IS BREACHED";
+		passwordTitle.style.display = "block";
+		passwordStrengthText.style.display = "block";
 	}
 	else
 	{
@@ -144,7 +149,7 @@ if (password.length > 0)
 		}
 		passwordStrength = Math.round(passwordStrength)
 
-
+		document.getElementById("passMeasurements").style.color = "Black";
 		document.getElementById("passMeasurements").innerHTML = " Password Analysis ";
 
 	if (password.length > 11)
@@ -388,8 +393,10 @@ function passPageToggle()
 		threeRandom.style.display = "none";
 		generalTips.style.display = "none";
 		extraSecurity.style.display = "none";
+		colourBackground.style.display = "none";
+		passwordStrengthText.style.display = "none";
 		//Displays the enter password form
-		passForm.style.display = "block";
+		passForm.style.display = "inline";
 	} else
 	{
 		//Changes the passPageButton (Used to toggle the page) to say "Back to Main Page"
