@@ -25,6 +25,7 @@ def analysePass(pword):
 
     #upper, lower, both
         ######NEEDS A CHECK FOR IF ALPHABETICAL CHARS ARE PRESENT AT ALL!
+    mixedcase = 0
     upper = pword.isupper()
     lower = pword.islower()
     if not upper and not lower:
