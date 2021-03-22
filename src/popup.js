@@ -62,13 +62,16 @@ addToCalendar.addEventListener('click', function()
 		//Runs a function providing a link to the Github Repository
 		openNCSCLink();
 	});
+
 	passCheckButton.addEventListener('click', function()
 	{
 		//Runs the Password Checking Function
 		passCheck();
 		searchString();
 	});
+
 });
+
 
 const LOWER_REGEX = /([a-z])/g;
 const UPPER_REGEX = /([A-Z])/g;
@@ -86,7 +89,7 @@ function passCheck()
 {
 	onceCalc.style.display = "none";
 	var password = document.getElementById("passForm").value;
-	
+
 
 	colourBackground.style.display = "block";
 	bruteForceEstimation.style.display = "block";
@@ -149,7 +152,7 @@ if (password.length > 0)
 		}
 		passwordStrength = Math.round(passwordStrength)
 
-		document.getElementById("passMeasurements").style.color = "Black";
+		document.getElementById("passMeasurements").style.color = "white";
 		document.getElementById("passMeasurements").innerHTML = " Password Analysis ";
 
 	if (password.length > 11)

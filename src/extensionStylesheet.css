@@ -1,4 +1,4 @@
-body 
+body
 {
     margin: 15px;
     font-family: 'Josefin Sans', sans-serif;
@@ -9,7 +9,7 @@ body
 }
 
 
-#passMeasurements 
+#passMeasurements
 {
 	text-align: center;
 }
@@ -62,7 +62,7 @@ form, .content {
 	border: 2px solid #000000;
 }
 
-input[type=button] 
+input[type=button]
 {
     float: center;
 	padding: 8px;
@@ -91,16 +91,16 @@ input[type=button]
 }
 
 
-#upper ,#lower , #number, #special , #concurrent 
+#upper ,#lower , #number, #special , #concurrent
 {
 	color:red;
 }
 
 #colourBackground
 {
-	background-color: lightgrey;
+	background-color: black;
 	width: 300px;
-	border: 5px solid black;
+	border: 5px solid lightgrey;
 	border-radius: 25px;
 	padding: 10px;
 	margin: auto;
