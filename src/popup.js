@@ -282,6 +282,8 @@ else
 		document.getElementById("passwordStrengthScore").innerHTML = " Password Stength = " + passwordStrength + "%";
 		document.getElementById("passwordStrengthScore").style.color = "Red";
 }
+
+document.getElementById("passwordReferal").innerHTML="Please refer to the Password Etiquette page for further information regarding password security";
 }
 
 function determineNegativeFactor(_Pcapital, _Plower, _Pnumber, _Pspecial, _Pconcurrent)
