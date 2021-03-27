@@ -72,7 +72,8 @@ addToCalendar.addEventListener('click', function()
 
 });
 
-
+//Setting up of variables
+//I assume these are used as part of the Security Consultant feature
 const LOWER_REGEX = /([a-z])/g;
 const UPPER_REGEX = /([A-Z])/g;
 const NUM_REGEX = /([\d])/g;
@@ -84,7 +85,6 @@ var specialMinCount = 2;
 var passwordMinLength = 8;
 
 //PassCheck Function
-//Still needs checking user input against breached passwords file and the Security Consultant
 function passCheck()
 {
 	onceCalc.style.display = "none";
@@ -98,26 +98,47 @@ function passCheck()
 	{
 		var hasString = contents.includes(password);
 
-		//document.write(hasString);
 		if (hasString == true)
+		{
+			onceCalc.style.display = "none";
+			passwordTitle.style.color = "maroon";
+			document.getElementById("passwordTitle").innerHTML = "THIS PASSWORD IS BREACHED";
+			passwordTitle.style.display = "block";
+			passwordStrengthText.style.display = "block";
+		}
+		else
+		{
+			passwordTitle.style.display = "none";
+		}
+	})
+
+	//Sets up variables to hold the date. Day is always stored as the first of the month.
+	var d = "01";
+	var m = new Date().getMonth() + 1;
+	var y = new Date().getFullYear();
+	
+	//Checks if future month will be higher than twelve, if so it will be fixed and the year will be incremented. A "0" is added to start of month to look cool.
+	//The next two checks are to check if the future month will be a single or double digit number. If single the required "0" is added for cool factor.
+	if (m>6)
 	{
-		onceCalc.style.display = "none";
-		passwordTitle.style.color = "maroon";
-		document.getElementById("passwordTitle").innerHTML = "THIS PASSWORD IS BREACHED";
-		passwordTitle.style.display = "block";
-		passwordStrengthText.style.display = "block";
+		m = m - 6;
+		y = y + 1;
+		m = "0" + m;
+	}
+	else if (m>4)
+	{
+		m = m + 6;
 	}
 	else
 	{
-		passwordTitle.style.display = "none";
+		m = m + 6;
+		m = "0" + m;
 	}
-	})
+	
+	//Change display to show the date the user should reset their password on.
+	document.getElementById("date").innerHTML = "We recommend that you change it by: " + d + "/" + m + "/"  + y;
+	
 
-// sets year that password needs reset too
-	var d = new Date().getDate();
-	var m = new Date().getMonth() + 1;
-	var y = new Date().getFullYear();
-	document.getElementById("date").innerHTML = "We recommend that you change it by: " + d + "/" + (m + 6) + "/"  + y;
 
 
 
@@ -363,11 +384,45 @@ function openRepoLink()
 }
 
 //OpenGoogleCalendar Function
+//This function opens a new tab containg a Google Calendar event form pre-filled with a date set 6 months in the future.
+//This allows the user to add the event to their Google Calendar which will remind them to reset their password.
 function openGoogleCal()
 {
-		//Opens the supplied URL in a new tab
-	    var newURL = "https://calendar.google.com/calendar/u/0/r/eventedit?text=Change+Password&details=Project+Perfect+Password+recommends+that+you+change+your+password+as+it%27s+been+6+months!";
-        chrome.tabs.create({ url: newURL });
+		//Sets up variables for the dates. Day is always first of the month.
+		var d = "01";
+		var m = new Date().getMonth() + 1;
+		var y = new Date().getFullYear();
+		
+		//Checks if future month will be higher than twelve, if so it will be fixed and the year will be incremented. A "0" is added to start of month for link formatting.
+		//The next two checks are to check if the future month will be a single or double digit number. If single the required "0" is added for link formatting.
+		if (m>6)
+		{
+			m = m - 6;
+			y = y + 1;
+			m = "0" + m;
+		}
+		else if (m>4)
+		{
+			m = m + 6;
+		}
+		else
+		{
+			m = m + 6;
+			m = "0" + m;
+		}
+		
+		//Sets the variables required to set the time of the Google Calendar event
+		var startTime = "T150000Z/";
+		var endTime = "T160000Z";
+	
+		//Sets variables containing the "meat" of the Google Calendar link. This contains the details and title of the event as well.
+		var urlStart = "https://calendar.google.com/calendar/u/0/r/eventedit?text=Change+Password&dates=";
+		var urlEnd = "&details=Project+Perfect+Password+recommends+that+you+change+your+password+as+it%27s+been+6+months";
+		
+		//This section "concatenates" the URL together and opens the link in a new tab. 
+		//I tried to use Javascripts built in concatenation function but that breaks everything somehow.
+		var newURL = urlStart + y + m + d + startTime + y + m + d + endTime + urlEnd;
+		chrome.tabs.create({ url: newURL });
 }
 
 //OpenNCSCLink Function
