@@ -301,29 +301,23 @@ if (password.length > 0)
 
 			document.getElementById("passwordReferal").innerHTML="Please refer to the Password Etiquette page for further information regarding password security";
 			}
-<<<<<<< HEAD
-			
-=======
->>>>>>> main
+
 else
 	{
 	//failsafe
 	alert("Empty User Input, Please try again");
 	document.getElementById("passMeasurements").style.display="none";
-<<<<<<< HEAD
+
 	
-=======
-	document.getElementById("contingency").innerHTML="You have not entered an input, please try again!";
->>>>>>> main
+
 	document.getElementById("bruteForceEstimation").style.display="none";
 	document.getElementById("passwordStrengthScore").style.display="none";
 	
 	document.getElementById("colourBackground").style.display="none";
-<<<<<<< HEAD
+
 	document.getElementById("passwordStrengthText").innerHTML="You have not entered a password. Please try again!";
 	
-=======
->>>>>>> main
+
 	
 
 	
