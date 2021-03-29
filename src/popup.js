@@ -73,7 +73,7 @@ addToCalendar.addEventListener('click', function()
 });
 
 //Setting up of variables
-//I assume these are used as part of the Security Consultant feature
+//These are used as part of the Security Consultant feature
 const LOWER_REGEX = /([a-z])/g;
 const UPPER_REGEX = /([A-Z])/g;
 const NUM_REGEX = /([\d])/g;
@@ -89,7 +89,7 @@ function passCheck()
 {
 	onceCalc.style.display = "none";
 	var password = document.getElementById("passForm").value;
-
+	
 
 	colourBackground.style.display = "block";
 	bruteForceEstimation.style.display = "block";
@@ -98,7 +98,7 @@ function passCheck()
 	{
 		var hasString = contents.includes(password);
 
-		if (hasString == true)
+		if (hasString == true && password.length >0)
 		{
 			onceCalc.style.display = "none";
 			passwordTitle.style.color = "maroon";
@@ -265,46 +265,64 @@ if (password.length > 0)
 
 			}
 
-}
-else
-{
-	//failsafe
-	alert("Empty User Input, Please try again");
-}
-
 
 	// set initial requirements that determine the strength of the password (will be tweaked)
 
-if (passwordStrength == 100)
-{
-		document.getElementById("passwordStrengthText").innerHTML = "Your Password is: Very Strong";
-		document.getElementById("passwordStrengthText").style.color = "Lime";
-		document.getElementById("passwordStrengthScore").innerHTML = " Password Stength = " + passwordStrength + "%";
-		document.getElementById("passwordStrengthScore").style.color = "Lime";
-}
-else if (passwordStrength >= 80)
-{
-		document.getElementById("passwordStrengthText").innerHTML = "Your Password is: Strong";
-		document.getElementById("passwordStrengthText").style.color = "MediumSpringGreen";
-		document.getElementById("passwordStrengthScore").innerHTML = " Password Stength = " + passwordStrength + "%";
-		document.getElementById("passwordStrengthScore").style.color = "MediumSpringGreen";
-}
-else if (passwordStrength >= 35)
-{
-		document.getElementById("passwordStrengthText").innerHTML = "Your Password is: Medium";
-		document.getElementById("passwordStrengthText").style.color = "Yellow";
-		document.getElementById("passwordStrengthScore").innerHTML = " Password Stength = " + passwordStrength + "%";
-		document.getElementById("passwordStrengthScore").style.color = "Yellow";
-}
-else
-{
-		document.getElementById("passwordStrengthText").innerHTML = "Your Password is: Weak";
-		document.getElementById("passwordStrengthText").style.color = "Red";
-		document.getElementById("passwordStrengthScore").innerHTML = " Password Stength = " + passwordStrength + "%";
-		document.getElementById("passwordStrengthScore").style.color = "Red";
-}
+			if (passwordStrength == 100)
+			{
+				document.getElementById("passwordStrengthText").innerHTML = "Your Password is: Very Strong";
+				document.getElementById("passwordStrengthText").style.color = "Lime";
+				document.getElementById("passwordStrengthScore").innerHTML = " Password Stength = " + passwordStrength + "%";
+				document.getElementById("passwordStrengthScore").style.color = "Lime";
+			}
+			else if (passwordStrength >= 80)
+			{
+				document.getElementById("passwordStrengthText").innerHTML = "Your Password is: Strong";
+				document.getElementById("passwordStrengthText").style.color = "MediumSpringGreen";
+				document.getElementById("passwordStrengthScore").innerHTML = " Password Stength = " + passwordStrength + "%";
+				document.getElementById("passwordStrengthScore").style.color = "MediumSpringGreen";
+			}
+			else if (passwordStrength >= 35)
+			{
+				document.getElementById("passwordStrengthText").innerHTML = "Your Password is: Medium";
+				document.getElementById("passwordStrengthText").style.color = "Yellow";
+				document.getElementById("passwordStrengthScore").innerHTML = " Password Stength = " + passwordStrength + "%";
+				document.getElementById("passwordStrengthScore").style.color = "Yellow";
+			}
+			else
+			{
+				document.getElementById("passwordStrengthText").innerHTML = "Your Password is: Weak";
+				document.getElementById("passwordStrengthText").style.color = "Red";
+				document.getElementById("passwordStrengthScore").innerHTML = " Password Stength = " + passwordStrength + "%";
+				document.getElementById("passwordStrengthScore").style.color = "Red";
+			}
 
-document.getElementById("passwordReferal").innerHTML="Please refer to the Password Etiquette page for further information regarding password security";
+
+
+			document.getElementById("passwordReferal").innerHTML="Please refer to the Password Etiquette page for further information regarding password security";
+			}
+			
+else
+	{
+	//failsafe
+	alert("Empty User Input, Please try again");
+	document.getElementById("passMeasurements").style.display="none";
+	
+	document.getElementById("bruteForceEstimation").style.display="none";
+	document.getElementById("passwordStrengthScore").style.display="none";
+	
+	document.getElementById("colourBackground").style.display="none";
+	document.getElementById("passwordStrengthText").innerHTML="You have not entered a password. Please try again!";
+	
+	
+
+	
+	
+	
+	
+	
+	
+	}
 }
 
 function determineNegativeFactor(_Pcapital, _Plower, _Pnumber, _Pspecial, _Pconcurrent)
