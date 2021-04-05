@@ -14,14 +14,14 @@
          <h1>Project Perfect Password</h1>
       </div>
       <!-- Sets up the Main Password Strength Checking Page and its components. This Divison is hidden when the Password Etiquette button is pressed -->
-	 
+
       <div id="passStrengthPage">
          <!-- Holds the Password Strength Value. Currently just displays whatever the User inputs into the password field. -->
          <div>
             <hr>
             <!-- Changes based on User input. Will be variable based on the Strength checking function to be implemented later -->
             <h3 align="center" id="passwordTitle">Password Analyzer</h3>
-			
+
             <h3 align="center" id ="onceCalc"> Please enter your Password below</h3>
             <h3 align="center" id ="passwordStrengthText"></h3>
             <!--	 <hr id="analyzerRule"> -->
@@ -36,6 +36,7 @@
             <h5 id = "number"></h5>
             <h5 id = "special"></h5>
             <h5 id = "concurrent"></h5>
+            <h5 id = "factorial"></h5>
             <h5 id = "passwordStrengthScore" align="center"></h5>
             <!--
                <h5 id = "consecutive">>Doesn't contain ---</h5>        Not working yet, possibly next iteration
@@ -46,10 +47,10 @@
 		<div id="passwordReferal">
 		 <!-- <p> Please refer to the Password Etiquette page for further information regarding password security -->
 		 </div>
-		 
+
 		 <div id="bruteForceEstimation">
             <p>It is estimated that your password would take:</p>
-            <p>"TIME" to brute force</p>
+            <p id = "bruteForceTime">"TIME" to brute force</p>
             <hr>
          </div>
          <!-- This currently displays the date in 6 months to the User based on current date. Could potentially add further functionality here?  -->
