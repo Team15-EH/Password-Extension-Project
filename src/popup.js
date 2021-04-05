@@ -153,6 +153,7 @@ if (password.length > 0)
 		var concurrentCharsFactor = countLetters(password); // determines a factor based on the number of concurrent characters
 		var negativeFactor = determineNegativeFactor(numOfCapitals, numOfLower, numOfNumbers, numOfSpecial, concurrentCharsFactor); // Determines a negative factor based on the mistakes in the password
 		// Function determines the strength of the password
+
 		var passwordStrength = 0 + (password.length * 4) + ((password.length - numOfCapitals) * 2) + ((password.length - numOfLower) * 2) + (numOfNumbers * 4) + (numOfSpecial * 6 ) +  negativeFactor;
 		//document.getElementById("onceCalc").innerHTML="";
 		var bruteForceTime = bruteForce(numOfCapitals, numOfLower, numOfNumbers, numOfSpecial, password.Length);
@@ -163,7 +164,7 @@ if (password.length > 0)
 		}
 		else if (numOfSpecial == 1)
 		{
-			passwordStrength = passwordStrength / 1.125
+			passwordStrength = passwordStrength / 1.125;
 		}
 
 		if (passwordStrength > 100) // if the strength is higher than 100 or less than 0, this sets them to 100 or 0 respectavly so that strength scores are not inflated.
@@ -329,7 +330,7 @@ function determineNegativeFactor(_Pcapital, _Plower, _Pnumber, _Pspecial, _Pconc
 
 	if ((_Pcapital > 0) && (_Plower > 0) && (_Pnumber == 0) && (_Pspecial == 0))
 	{
-		factor = factor - (capital + lower);
+		factor = factor - (_Pcapital + _Plower);
 	}
 	else if ((_Pcapital == 0) && (_Plower == 0) && (_Pnumber > 0) && (_Pspecial == 0))
 	{
