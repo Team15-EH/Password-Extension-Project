@@ -7,6 +7,7 @@ window.onload = function()
 	passEtiqPage.style.display = "none";
 	threeRandom.style.display = "none";
 	generalTips.style.display = "none";
+	additionalResources.style.display = "none";
 	extraSecurity.style.display = "none";
 	passStrengthPage.style.display = "block";
 }
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function ()
 	var passPageButton = document.getElementById("passPageButton");
 	var threeWordsButton = document.getElementById("threeWordsButton");
 	var generalTipsButton = document.getElementById("generalTipsButton");
+	var additionalResourcesButton = document.getElementById("additionalResourcesButton");
 	var extraSecurityButton = document.getElementById("extraSecurityButton");
 	var repoLinkButton = document.getElementById("repoLinkButton");
 	var passCheckButton = document.getElementById("passCheckButton");
@@ -47,6 +49,11 @@ addToCalendar.addEventListener('click', function()
 		//Runs the display function for the General Tips Division
 		generalTipsToggle();
 	});
+additionalResourcesButton.addEventListener('click', function()
+	{
+		//Runs the display function for the General Tips Division
+		additionalResourcesToggle();
+	});
 	extraSecurityButton.addEventListener('click', function()
 	{
 		//Runs the display function for the Extra Security Division
@@ -56,11 +63,6 @@ addToCalendar.addEventListener('click', function()
 	{
 		//Runs a function providing a link to the Github Repository
 		openRepoLink();
-	});
-	NCSCButton.addEventListener('click', function()
-	{
-		//Runs a function providing a link to the Github Repository
-		openNCSCLink();
 	});
 
 	passCheckButton.addEventListener('click', function()
@@ -153,7 +155,6 @@ if (password.length > 0)
 		var concurrentCharsFactor = countLetters(password); // determines a factor based on the number of concurrent characters
 		var negativeFactor = determineNegativeFactor(numOfCapitals, numOfLower, numOfNumbers, numOfSpecial, concurrentCharsFactor); // Determines a negative factor based on the mistakes in the password
 		// Function determines the strength of the password
-
 		var passwordStrength = 0 + (password.length * 4) + ((password.length - numOfCapitals) * 2) + ((password.length - numOfLower) * 2) + (numOfNumbers * 4) + (numOfSpecial * 6 ) +  negativeFactor;
 		//document.getElementById("onceCalc").innerHTML="";
 		var bruteForceTime = bruteForce(numOfCapitals, numOfLower, numOfNumbers, numOfSpecial, password.Length);
@@ -164,7 +165,7 @@ if (password.length > 0)
 		}
 		else if (numOfSpecial == 1)
 		{
-			passwordStrength = passwordStrength / 1.125;
+			passwordStrength = passwordStrength / 1.125
 		}
 
 		if (passwordStrength > 100) // if the strength is higher than 100 or less than 0, this sets them to 100 or 0 respectavly so that strength scores are not inflated.
@@ -500,14 +501,6 @@ function openGoogleCal()
 		chrome.tabs.create({ url: newURL });
 }
 
-//OpenNCSCLink Function
-function openNCSCLink()
-{
-		//Opens the supplied URL in a new tab
-	    var newURL = "https://www.ncsc.gov.uk/";
-        chrome.tabs.create({ url: newURL });
-}
-
 function passPageToggle()
 {
 	//Gets both the passStrengthPage and passEtiqPage Divisions and assigns them to variables
@@ -526,6 +519,7 @@ function passPageToggle()
 		threeRandom.style.display = "none";
 		generalTips.style.display = "none";
 		extraSecurity.style.display = "none";
+		additionalResources.style.display = "none";
 		colourBackground.style.display = "none";
 		passwordStrengthText.style.display = "none";
 		//Displays the enter password form
@@ -553,11 +547,13 @@ function threeWordsToggle()
 	passSecuritySummary.style.display = "none";
 
 	//Assign passEtiqPage components to variables
+	var w = document.getElementById("additionalResources");
 	var x = document.getElementById("threeRandom");
 	var y = document.getElementById("generalTips");
 	var z = document.getElementById("extraSecurity");
 
 	//Display the threeRandomWords component and hide the others
+	w.style.display ="none"
 	x.style.display = "block";
 	y.style.display = "none";
 	z.style.display = "none";
@@ -569,11 +565,13 @@ function generalTipsToggle()
 	passSecuritySummary.style.display = "none";
 
 	//Assign passEtiqPage components to variables
+	var w = document.getElementById("additionalResources");
 	var x = document.getElementById("threeRandom");
 	var y = document.getElementById("generalTips");
 	var z = document.getElementById("extraSecurity");
 
 	//Display the generalTips component and hide the others
+	w.style.display ="none"
 	x.style.display = "none";
 	y.style.display = "block";
 	z.style.display = "none";
@@ -585,12 +583,32 @@ function extraSecurityToggle()
 	passSecuritySummary.style.display = "none";
 
 	//Assign passEtiqPage components to variables
+	var w = document.getElementById("additionalResources");
 	var x = document.getElementById("threeRandom");
 	var y = document.getElementById("generalTips");
 	var z = document.getElementById("extraSecurity");
 
 	//Display the Extra Security component and hide the others
+	w.style.display = "none";
 	x.style.display = "none";
 	y.style.display = "none";
 	z.style.display = "block";
+};
+
+function additionalResourcesToggle()
+{
+	//Hide password etiquette summary
+	passSecuritySummary.style.display = "none";
+
+	//Assign passEtiqPage components to variables
+	var w = document.getElementById("additionalResources");
+	var x = document.getElementById("threeRandom");
+	var y = document.getElementById("generalTips");
+	var z = document.getElementById("extraSecurity");
+
+	//Display the Extra Security component and hide the others
+	w.style.display = "block";
+	x.style.display = "none";
+	y.style.display = "none";
+	z.style.display = "none";
 };
