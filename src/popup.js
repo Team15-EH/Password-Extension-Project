@@ -150,13 +150,14 @@ if (password.length > 0)
 		var numOfLower= (password.match(LOWER_REGEX) || []).length;  // Finding the number of lower Case characters
 		var numOfNumbers = (password.match(NUM_REGEX) || []).length;  // Finding the number of Number characters
 		var numOfSpecial = (password.match(SPECIAL_REGEX) || []).length;  // Finding the number of special characters
-
+		var passwordLength = password.length;
 		var concurrentCharsFactor = countLetters(password); // determines a factor based on the number of concurrent characters
 		var negativeFactor = determineNegativeFactor(numOfCapitals, numOfLower, numOfNumbers, numOfSpecial, concurrentCharsFactor); // Determines a negative factor based on the mistakes in the password
 		// Function determines the strength of the password
-		var passwordStrength = 0 + (password.length * 4) + ((password.length - numOfCapitals) * 2) + ((password.length - numOfLower) * 2) + (numOfNumbers * 4) + (numOfSpecial * 6 ) +  negativeFactor;
+		var passwordStrength = 0 + (passwordLength * 4) + ((passwordLength - numOfCapitals) * 2) + ((passwordLength - numOfLower) * 2) + (numOfNumbers * 4) + (numOfSpecial * 6 ) +  negativeFactor;
 		//document.getElementById("onceCalc").innerHTML="";
-		var bruteForceTime = bruteForce(numOfCapitals, numOfLower, numOfNumbers, numOfSpecial, password.Length);
+		var bruteForceTime = bruteForce(numOfCapitals, numOfLower, numOfNumbers, numOfSpecial, passwordLength);
+		//bruteForceTime = Math.round(bruteForcetime);
 
 		if (numOfSpecial == 0) // if the number of special characters is 0 or 1, this negativly impacts the password strength
 		{
@@ -164,7 +165,7 @@ if (password.length > 0)
 		}
 		else if (numOfSpecial == 1)
 		{
-			passwordStrength = passwordStrength / 1.125
+			passwordStrength = passwordStrength / 1.125;
 		}
 
 		if (passwordStrength > 100) // if the strength is higher than 100 or less than 0, this sets them to 100 or 0 respectavly so that strength scores are not inflated.
@@ -301,8 +302,50 @@ if (password.length > 0)
 				document.getElementById("passwordStrengthScore").style.color = "Red";
 			}
 
+			var timeScale = "seconds"; // set of if statements to set make the timescale larger so the number is easier to display
+			if (bruteForceTime >= 3153600000)
+			{
+				bruteForceTime = bruteForceTime / 3153600000;
 
-			document.getElementById("bruteForceTime").innerHTML = "The time to brute force this password is " + bruteForceTime + " seconds";
+				timeScale = "centuries";
+			}
+			else if (bruteForceTime >= 315360000)
+			{
+				bruteForceTime = bruteForceTime / 3153600000;
+				timeScale = "decades";
+			}
+			else if (bruteForceTime >= 31536000)
+			{
+				bruteForceTime = bruteForceTime / 31536000;
+				timeScale = "years";
+			}
+			else if (bruteForceTime >= 86400)
+			{
+				bruteForceTime = bruteForceTime / 86400;
+				timeScale = "days";
+			}
+			else if (bruteForceTime >= 3600)
+			{
+				bruteForceTime = bruteForceTime / 3600;
+				timeScale = "hours";
+			}
+			else if (bruteForceTime >= 60)
+			{
+				bruteForceTime = bruteForceTime / 60;
+				timeScale = "minutes";
+			}
+			bruteForceTime = Math.round(bruteForceTime);
+
+
+			if (bruteForceTime >= 315360000000000) // if password brute force is really long, just say its gonna take ages
+			{
+				document.getElementById("bruteForceTime").innerHTML = "The time to brute force this password is longer than it's worth displaying";
+			}
+			else
+			{
+					document.getElementById("bruteForceTime").innerHTML = "The time to brute force this password is " + bruteForceTime + " " + timeScale;
+			}
+
 			document.getElementById("passwordReferal").innerHTML="Please refer to the Password Etiquette page for further information regarding password security";
 			}
 
@@ -397,18 +440,15 @@ factor = (40 * totalConcurrentCharactersHigherThanFour) + (20 * totalConcurrentC
 return factor;
 }
 
-function bruteForce (_NumCapital,_NumLower,_NumNumber,_NumSpecial,_NumLength) // function for calculating the brute force time, Edwards Stuff
+function bruteForce (_NumCapital,_NumLower,_NumNumber,_NumSpecial,_PassLength) // function for calculating the brute force time, Edwards Stuff
 {
-var mixedCase = 1;
-var charSet = 0;
 
-if ((_NumCapital > 0 ) && (_NumLower > 0))
+
+var charSet = 26;
+
+if ((_NumCapital > 0 ) && (_NumLower > 0)) // determining the number of characters in the set
 {
-	mixedCase = 52;
-}
-else if ((_NumCapital > 0 ) || (_NumLower > 0))
-{
-	charSet = 26;
+	charSet = 52;
 }
 
 if (_NumNumber > 0)
@@ -421,34 +461,33 @@ if (_NumSpecial > 0)
 }
 
 
-return BFCalc(_NumLength, charSet);
+return BFCalc(_PassLength, charSet);
 
 
 }
 
-function BFCalc(_n,_k){ // Edwards function for calculating the brute force tiem
+function BFCalc(_k,_n){ // Edwards function for calculating the brute force tiem
 
-let nMinusK = _n -_k;
-let n_fac = 10;// factorial(_n);
-let k_fac =  factorial(_k);
-let nMinusK_Fac = 10;//factorial(nMinusK);
-let totalCombinations = n_fac/(k_fac * nMinusK_Fac);
-let seconds = (totalCombinations/500);
-return seconds;
+//let nMinusK = _n -_k;
+//let n_fac =  factorial(_n);
+//let k_fac =  factorial(_k);
+//let nMinusK_Fac = factorial(nMinusK);
+//let totalCombinations = n_fac/(k_fac * nMinusK_Fac);
+//let seconds = (((((totalCombinations/500)/60)/60)/24)/365);
+let combinations = Math.pow(_n,_k); // find number of combination
+//let eCores = 1/((1-0.99)+0.99/16);
+//let gFLOPS = ((3.930 * 10000000000 * eCores);
+//let keysPerSecond = gFlOPS;
+let time = combinations / 1000; // find time taken if 1000 tries are attempted per second
+//if (seconds > (10 ^ 63))
+//{
+//	seconds = "infinite";
+//}
+return time;
 
 }
 
-function factorial(_Number){ // calculates the factorial
 
-if (_Number == 0)
-{
-	return 1;
-}
-else
- {
-	return (_Number * factorial(_Number - 1));
-}
-}
 
 //OpenRepoLink Function
 function openRepoLink()

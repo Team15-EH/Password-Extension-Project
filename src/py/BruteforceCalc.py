@@ -36,7 +36,7 @@ def analysePass(pword):
     #26 chars, 10 numbers
     chars = 0
 
-    
+
     if (upper or lower):
         chars = 26
     if mixedcase == 1:
