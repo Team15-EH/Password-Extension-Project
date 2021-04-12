@@ -26,13 +26,12 @@ document.addEventListener('DOMContentLoaded', function ()
 	var addToCalendar = document.getElementById("addToCalendar")
 
 
-// add to calendar call
-addToCalendar.addEventListener('click', function()
-{
-	openGoogleCal();
-}
-)
-
+	// add to calendar call
+	addToCalendar.addEventListener('click', function()
+	{
+		//Runs the function to open Google Calendar with the correct date and time marked
+		openGoogleCal();
+	});
 	//Adding each of the "Input Button Listeners"
     passPageButton.addEventListener('click', function()
 	{
@@ -127,7 +126,7 @@ function passCheck()
 		y = y + 1;
 		m = "0" + m;
 	}
-	else if (m>4)
+	else if (m=>4)
 	{
 		m = m + 6;
 	}
@@ -477,7 +476,7 @@ function openGoogleCal()
 			y = y + 1;
 			m = "0" + m;
 		}
-		else if (m>4)
+		else if (m=>4)
 		{
 			m = m + 6;
 		}
@@ -498,7 +497,7 @@ function openGoogleCal()
 		//This section "concatenates" the URL together and opens the link in a new tab.
 		//I tried to use Javascripts built in concatenation function but that breaks everything somehow.
 		var newURL = urlStart + y + m + d + startTime + y + m + d + endTime + urlEnd;
-		chrome.tabs.create({ url: newURL });
+		chrome.tabs.create({ url: newURL , active: false});
 }
 
 function passPageToggle()
@@ -512,6 +511,7 @@ function passPageToggle()
 	{
 		//Makes the "Check Password" button visible
 		passCheckButton.style.visibility = "visible";
+		document.getElementById("passPageButton").value = "Password Etiquette";
 		//Hides passEtiqPage and displays passStrengthPage
 		y.style.display = "none";
 		x.style.display = "block";
