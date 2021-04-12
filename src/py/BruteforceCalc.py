@@ -28,8 +28,8 @@ def analysePass(pword):
     mixedcase = 0
     upper = pword.isupper()
     lower = pword.islower()
-    if not upper and not lower:
-        mixedCase = 1
+    if (not upper and not lower):
+        mixedcase = 1
 
     #number of possible chars
     #35 symbols on english keyboard
@@ -39,12 +39,12 @@ def analysePass(pword):
     
     if (upper or lower):
         chars = 26
-    elif mixedcase:
+    if mixedcase == 1:
         chars = 52
     if numbers:
-        chars += 10
+        chars = chars + 10
     if symbols:
-        chars += 35
+        chars = chars + 35
 
     return length, chars
 
