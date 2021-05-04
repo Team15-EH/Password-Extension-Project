@@ -155,9 +155,9 @@ if (password.length > 0)
 		var negativeFactor = determineNegativeFactor(numOfCapitals, numOfLower, numOfNumbers, numOfSpecial, concurrentCharsFactor); // Determines a negative factor based on the mistakes in the password
 		// Function determines the strength of the password
 		var passwordStrength = 0 + (passwordLength * 4) + ((passwordLength - numOfCapitals) * 2) + ((passwordLength - numOfLower) * 2) + (numOfNumbers * 4) + (numOfSpecial * 6 ) +  negativeFactor;
-		//document.getElementById("onceCalc").innerHTML="";
-		var bruteForceTime = bruteForce(numOfCapitals, numOfLower, numOfNumbers, numOfSpecial, passwordLength);
-		//bruteForceTime = Math.round(bruteForcetime);
+
+		var bruteForceTime = bruteForce(numOfCapitals, numOfLower, numOfNumbers, numOfSpecial, passwordLength); // find the brute force time
+
 
 		if (numOfSpecial == 0) // if the number of special characters is 0 or 1, this negativly impacts the password strength
 		{
@@ -354,14 +354,9 @@ else
 	//failsafe
 	alert("Empty User Input, Please try again");
 	document.getElementById("passMeasurements").style.display="none";
-
-
-
 	document.getElementById("bruteForceEstimation").style.display="none";
-	document.getElementById("passwordStrengthScore").style.display="none";
-
+	document.getElementById("passwordStrengthScore").style.display="none"; // block of code that removes all the password information if no password is entered
 	document.getElementById("colourBackground").style.display="none";
-
 	document.getElementById("passwordStrengthText").innerHTML="You have not entered a password. Please try again!";
 
 	}
@@ -371,21 +366,21 @@ function determineNegativeFactor(_Pcapital, _Plower, _Pnumber, _Pspecial, _Pconc
 {
 	let factor = 0;
 
-	if ((_Pcapital > 0) && (_Plower > 0) && (_Pnumber == 0) && (_Pspecial == 0))
+	if ((_Pcapital > 0) && (_Plower > 0) && (_Pnumber == 0) && (_Pspecial == 0)) // if a capital and lower case letter are included but no symbol or number are inputted
 	{
-		factor = factor - (_Pcapital + _Plower);
+		factor = factor - (_Pcapital + _Plower); // remove number of capital and lower letters from factor
 	}
-	else if ((_Pcapital == 0) && (_Plower == 0) && (_Pnumber > 0) && (_Pspecial == 0))
+	else if ((_Pcapital == 0) && (_Plower == 0) && (_Pnumber > 0) && (_Pspecial == 0)) // if only numbers
 	{
-		factor = factor - _Pnumber;
+		factor = factor - _Pnumber; // remove numbers from factor
 	}
 
 	if (_Pconcurrent > 0)
 	{
-		factor = factor - _Pconcurrent;
+		factor = factor - _Pconcurrent;// removes the concurrent character score from factor
 	}
 
-	return factor;
+	return factor; // return the factor
 }
 
 
@@ -394,7 +389,7 @@ function determineNegativeFactor(_Pcapital, _Plower, _Pnumber, _Pspecial, _Pconc
 function countLetters(_Pstr){
 
 let password = _Pstr.split(''); // creates a new array to hold each character
-let letters = []; // Counting the letters
+
 let currentLetterCount = 1; // number of times a character appears in the password in a row
 let highestCount = 0; // holds the highest of any concurrent characters. e.g if 5 "A"s appear this number will be 5
 let totalConcurrentCharactersHigherThanTwo = 0; // total number of times a set of 3 concurrent characters appear
@@ -411,8 +406,6 @@ for (let i = 0; i < password.length; i++)
 	}
 	else // if the next character is not the same, do this code
 	{
-	//	let value = `${currentLetterCount}${password[i]}`; leftover code
-	//	letters = [...letters,value]; leftover code
 
 		if (currentLetterCount >= 4)
 		{
@@ -429,11 +422,9 @@ for (let i = 0; i < password.length; i++)
 		currentLetterCount = 1; // set found letter count back to one
 	}
 
-
 }
 
-//return highestCount;legacy code
-//return letters.join(" "); legacy code
+
 
 // calculates a factor based on the number of concurrent characters and then returns them
 factor = (40 * totalConcurrentCharactersHigherThanFour) + (20 * totalConcurrentCharactersHigherThanTwo) + (10 * highestCount);
@@ -444,45 +435,35 @@ function bruteForce (_NumCapital,_NumLower,_NumNumber,_NumSpecial,_PassLength) /
 {
 
 
-var charSet = 26;
-
-if ((_NumCapital > 0 ) && (_NumLower > 0)) // determining the number of characters in the set
+var charSet = 26; // starts at 26 for lower case
+// this whole function determines the number of potential character are being used
+if ((_NumCapital > 0 ) && (_NumLower > 0))
 {
-	charSet = 52;
+	charSet = 52; // set to 52 if capitals and lower case are involved
 }
 
 if (_NumNumber > 0)
 {
-	charSet = charSet + 10;
+	charSet = charSet + 10; // add 10 for numbers
 }
 if (_NumSpecial > 0)
 {
-	charSet = charSet + 35;
+	charSet = charSet + 35; // add 35 for symbols
 }
 
 
-return BFCalc(_PassLength, charSet);
+return BFCalc(_PassLength, charSet); // return the BF calc function
 
 
 }
 
-function BFCalc(_k,_n){ // Edwards function for calculating the brute force tiem
+function BFCalc(_k,_n){ // function that determines the time to brute force
 
-//let nMinusK = _n -_k;
-//let n_fac =  factorial(_n);
-//let k_fac =  factorial(_k);
-//let nMinusK_Fac = factorial(nMinusK);
-//let totalCombinations = n_fac/(k_fac * nMinusK_Fac);
-//let seconds = (((((totalCombinations/500)/60)/60)/24)/365);
-let combinations = Math.pow(_n,_k); // find number of combination
-//let eCores = 1/((1-0.99)+0.99/16);
-//let gFLOPS = ((3.930 * 10000000000 * eCores);
-//let keysPerSecond = gFlOPS;
+
+let combinations = Math.pow(_n,_k); // find number of possible combination
+
 let time = combinations / 1000; // find time taken if 1000 tries are attempted per second
-//if (seconds > (10 ^ 63))
-//{
-//	seconds = "infinite";
-//}
+
 return time;
 
 }
